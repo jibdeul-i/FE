@@ -6,7 +6,11 @@ const TestPage = () => {
       <div className={"bg-purple-500 h-[1000px] flex flex-col"}>
         <div>page-content1</div>
         <h2 className="mt-[150px] mx-auto">
+          <div className="flex justify-cetner items-center">
+            <div className="w-[500px]">
           <JejuMap />
+          </div>
+          </div>
         </h2>
       </div>
       <div className="bg-black h-[1000px] text-white flex flex-col">
