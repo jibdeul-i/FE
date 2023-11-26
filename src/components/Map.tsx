@@ -18,8 +18,12 @@ const touristSpots: TouristSpot[] = [
 ];
 
 export default function JejuMap() {
+  const permanentMarkerImageSrc = '/Danielle1.png';
+  const festivalMarkerImageSrc = '/Hanni1.png';
+
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
+  const [visibleCategory, setVisibleCategory] = useState(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -38,11 +42,16 @@ export default function JejuMap() {
         setMap(newMap);
 
         const newMarkers = touristSpots.map((spot) => {
+          const imageSize = new window.kakao.maps.Size(24, 35);
+          const imageSrc = spot.category === 'permanent' ? permanentMarkerImageSrc : festivalMarkerImageSrc;
+          const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+
           const markerPosition = new window.kakao.maps.LatLng(spot.lat, spot.lng);
           const marker = new window.kakao.maps.Marker({
             map: newMap,
             position: markerPosition,
             title: spot.name,
+            image: markerImage
           });
 
           return { marker, category: spot.category };
@@ -52,25 +61,43 @@ export default function JejuMap() {
     });
   }, []);
 
-  const toggleCategory = (category) => {
+  const showCategory = (category) => {
+    setVisibleCategory(category);
+    const bounds = new window.kakao.maps.LatLngBounds();
+
     markers.forEach(({ marker, category: markerCategory }) => {
       if (markerCategory === category) {
-        if (marker.getMap()) {
-          marker.setMap(null); // 마커 숨기기
-        } else {
-          marker.setMap(map); // 마커 표시하기
-        }
+        marker.setMap(map); // 마커 표시
+        bounds.extend(marker.getPosition());
+      } else {
+        marker.setMap(null); // 마커 숨기기
       }
     });
+
+    if (map && !bounds.isEmpty()) {
+      map.setBounds(bounds); // 지도 범위를 마커가 있는 범위로 조정
+    }
   };
 
   return (
     <>
-      <div>
-        <button onClick={() => toggleCategory('permanent')}>상시</button>
-        <button onClick={() => toggleCategory('festival')}>축제</button>
+      <div id="jeju-map" className="max-w-[500px] h-[500px] relative mx-auto">
+      <div className="absolute top-4 left-4 z-10">
+        <button 
+          className={`px-4 py-1 border bg-white text-black rounded-full hover:bg-gray-300 shadow focus:outline-none ${visibleCategory === 'permanent' ? 'bg-gray-300' : ''}`} 
+          onClick={() => showCategory('permanent')}
+        >
+          상시
+        </button>
+        <button 
+          className={`px-4 py-1 ml-1 border bg-white text-black rounded-full hover:bg-gray-300 shadow focus:outline-none ${visibleCategory === 'festival' ? 'bg-gray-300' : ''}`} 
+          onClick={() => showCategory('festival')}
+        >
+          축제
+        </button>
       </div>
-      <div id="jeju-map" className="max-w-[500px] h-[500px]"></div>
+      </div>
+      
     </>
   );
 };
