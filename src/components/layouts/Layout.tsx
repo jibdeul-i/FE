@@ -18,7 +18,7 @@ const Layout = (props: LayoutProps) => {
             "flex items-center fixed h-[60px] top-0 w-full max-w-[500px] z-10  "
           }
         >
-          로고로고
+          로고로고로고
         </div>
         {!noHeader && <Header />}
         <main>
