@@ -1,5 +1,3 @@
-import JejuMap from "@/components/Map";
-
 const TestPage = () => {
   return (
     <>
@@ -7,9 +5,7 @@ const TestPage = () => {
         <div>page-content1</div>
         <h2 className="mt-[150px] mx-auto">
           <div className="flex justify-cetner items-center">
-            <div className="w-[500px]">
-          <JejuMap />
-          </div>
+
           </div>
         </h2>
       </div>
