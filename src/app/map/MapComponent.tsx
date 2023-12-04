@@ -43,6 +43,7 @@ const MapComponent = ({ spots, markerImages, onMapLoad }) => {
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement('script');
       script.src = "/maps-api";
+
       document.head.appendChild(script);
 
       script.onload = () => {

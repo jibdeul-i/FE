@@ -19,3 +19,4 @@ const MapDetailPage = () => {
   );
 };
 export default MapDetailPage;
+
