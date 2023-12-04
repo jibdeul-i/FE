@@ -42,7 +42,7 @@ const MapComponent = ({ spots, markerImages, onMapLoad }) => {
 
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement('script');
-      script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=8d1576d5892fe2db039d7947d8ee3841&autoload=false";
+      script.src = "/maps-api";
       document.head.appendChild(script);
 
       script.onload = () => {
