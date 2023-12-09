@@ -7,7 +7,7 @@ interface CardComponentProps {
 
 const CardComponent = ({ data }: CardComponentProps) => {
   return (
-    <div className="w-full rounded overflow-hidden shadow-lg bg-white relative">
+    <div className="w-full rounded overflow-hidden shadow-lg bg-white relative hover:cursor-pointer">
       <img className="w-full h-48 object-cover opacity-90" src={data.imageUrl} alt={data.title} />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-6 text-center">
         <div className="font-bold text-4xl mb-2 text-white">{data.title}</div>

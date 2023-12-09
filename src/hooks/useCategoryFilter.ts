@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const useCategoryFilter = (map, markers, category) => {
   const [visibleCategory, setVisibleCategory] = useState(category);
@@ -8,7 +8,7 @@ const useCategoryFilter = (map, markers, category) => {
 
     const bounds = new window.kakao.maps.LatLngBounds();
 
-    markers.forEach(marker => {
+    markers.forEach((marker) => {
       // 마커 객체의 존재성을 확인
       if (marker && marker.marker) {
         if (marker.category === visibleCategory) {
