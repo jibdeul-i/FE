@@ -6,20 +6,23 @@ interface LayoutProps {
   children: React.ReactNode;
   noHeader?: boolean;
   noFooter?: boolean;
+  noLogo?: boolean;
 }
 
 const Layout = (props: LayoutProps) => {
-  const { children, noHeader, noFooter } = props;
+  const { children, noHeader, noFooter, noLogo } = props;
   return (
     <>
       <div className="h-screen max-w-[500px] mx-auto flex flex-col pt-[60px]">
-        <div
-          className={
-            "flex items-center fixed h-[60px] top-0 w-full max-w-[500px] z-10  "
-          }
-        >
-          로고
-        </div>
+        {!noLogo && (
+          <div
+            className={
+              "flex items-center fixed h-[60px] top-0 w-full max-w-[500px] z-10  "
+            }
+          >
+            로고
+          </div>
+        )}
         {!noHeader && <Header />}
         <main>
           <div className={`${!noHeader && "pt-[110px]"}`}>{children}</div>
