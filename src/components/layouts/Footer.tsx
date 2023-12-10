@@ -14,7 +14,7 @@ const Footer = () => {
     <>
       <div
         className={
-          "flex fixed h-[60px] bottom-0 w-full max-w-[500px] bg-white border-t"
+          "flex fixed h-[60px] bottom-0 w-full max-w-[500px] bg-white border-t z-[999999]"
         }
       >
         <div className="w-full grid grid-cols-5 items-center">
