@@ -1,9 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import CategoryResultList from '@/components/CategoryResultList';
-import useFilteredSpots from '@/hooks/useFilteredSpots';
 import { TouristSpot } from '@/types/touristSpots';
+import CategoryResultList from '@/components/CategoryResultList';
 
 interface MapComponentProps {
   spots: TouristSpot[];
@@ -67,8 +66,7 @@ const MapComponent = ({ spots, markerImages, onMapLoad }: MapComponentProps) => 
 
   return 
   <div id="jeju-map" className="w-full h-[calc(100%-3.75rem)]">
-    <SearchResultList spots={filteredSpots} />
-  </div>;
+  </div>  
 };
 
 export default MapComponent;

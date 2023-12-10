@@ -3,7 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link  from 'next/link';
 import Layout from "@/components/layouts/Layout";
-import { touristSpots } from "@/types/touristSpots"
+import CategoryResultList from '@/components/CategoryResultList';
+import useFilteredSpots from '@/hooks/useFilteredSpots';
+import { touristSpots } from '@/types/touristSpots';
 
 export default function() {
   const permanentMarkerImageSrc = '/Danielle1.png';
@@ -12,6 +14,7 @@ export default function() {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [visibleCategory, setVisibleCategory] = useState(null);
+  const [filteredSpots, setFilteredSpots] = useState([]);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -65,6 +68,9 @@ export default function() {
     if (map && !bounds.isEmpty()) {
       map.setBounds(bounds); // 지도 범위를 마커가 있는 범위로 조정
     }
+
+    const categorySpots = touristSpots.filter(spot => spot.category === category);
+    setFilteredSpots(categorySpots);
   };
 
   return (
@@ -94,6 +100,9 @@ export default function() {
       </div>
       </div>
       </main>
+      {visibleCategory && (
+      <CategoryResultList spots={filteredSpots} />
+      )}
       </Layout>
     </>
   );
