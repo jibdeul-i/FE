@@ -75,7 +75,7 @@ export default function() {
 
   return (
     <>
-      <Layout>
+      <Layout noHeader={true}>
       <main className="MapContainer h-screen">
       <div id="jeju-map" className="w-full h-[calc(100%-3.75rem)]">
       <div className="absolute top-4 left-4 z-10">
@@ -101,7 +101,7 @@ export default function() {
       </div>
       </main>
       {visibleCategory && (
-      <CategoryResultList spots={filteredSpots} />
+      <CategoryResultList spots={filteredSpots} map={map} />
       )}
       </Layout>
     </>
