@@ -15,6 +15,7 @@ export default function() {
   const [markers, setMarkers] = useState([]);
   const [visibleCategory, setVisibleCategory] = useState(null);
   const [filteredSpots, setFilteredSpots] = useState([]);
+  const [isListVisible, setIsListVisible] = useState(true);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -73,6 +74,14 @@ export default function() {
     setFilteredSpots(categorySpots);
   };
 
+  const handleListElementClick = (lat, lng) => {
+    if (map) {
+      const moveLatLng = new kakao.maps.LatLng(lat, lng);
+      map.setCenter(moveLatLng);
+      setIsListVisible(false); // 리스트 화면 숨기기
+    }
+  };
+
   return (
     <>
       <Layout noHeader={true}>
@@ -101,7 +110,12 @@ export default function() {
       </div>
       </main>
       {visibleCategory && (
-      <CategoryResultList spots={filteredSpots} map={map} />
+        <CategoryResultList 
+          spots={filteredSpots} 
+          map={map} 
+          isListVisible={isListVisible} 
+          onHideList={() => setIsListVisible(false)} 
+        />
       )}
       </Layout>
     </>
