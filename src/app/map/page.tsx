@@ -16,6 +16,7 @@ export default function() {
   const [visibleCategory, setVisibleCategory] = useState(null);
   const [filteredSpots, setFilteredSpots] = useState([]);
   const [isListVisible, setIsListVisible] = useState(true);
+  const [isMapLoaded, setIsMapLoaded] = useState(false); 
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -49,6 +50,7 @@ export default function() {
           return { marker, category: spot.category };
         });
         setMarkers(newMarkers);
+        setIsMapLoaded(true); // 지도 로딩 상태 업데이트
       });
     });
   }, []);
@@ -76,8 +78,18 @@ export default function() {
 
   const handleListElementClick = (lat, lng) => {
     if (map) {
-      const moveLatLng = new kakao.maps.LatLng(lat, lng);
+      const moveLatLng = new window.kakao.maps.LatLng(lat, lng);
       map.setCenter(moveLatLng);
+      map.setLevel(10); 
+  
+      // 모든 마커를 숨기고 해당 요소의 마커만 표시
+      markers.forEach(({ marker }) => {
+        marker.setMap(null); // 모든 마커 숨기기
+        if (marker.getPosition().equals(moveLatLng)) {
+          marker.setMap(map); // 해당 요소의 마커만 표시
+        }
+      });
+  
       setIsListVisible(false); // 리스트 화면 숨기기
     }
   };
@@ -87,6 +99,7 @@ export default function() {
       <Layout noHeader={true}>
       <main className="MapContainer h-screen">
       <div id="jeju-map" className="w-full h-[calc(100%-3.75rem)]">
+    {isMapLoaded && (
       <div className="absolute top-4 left-4 z-10">
         <Link href="/map/list" passHref>
         <button 
@@ -107,6 +120,7 @@ export default function() {
           축제
         </button>
       </div>
+      )}
       </div>
       </main>
       {visibleCategory && (
