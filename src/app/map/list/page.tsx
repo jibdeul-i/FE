@@ -39,7 +39,7 @@ const cards: CardData[] = [
 const Page = () => {
   return (
     <>
-      <Layout>
+      <Layout noHeader={true}>
         <div className="container mx-auto p-4">
           <MapListComponent cards={cards} />
         </div>

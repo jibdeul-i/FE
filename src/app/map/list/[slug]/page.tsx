@@ -18,7 +18,7 @@ export default function MapDetailPage ({ params }: { params: PageParams }) {
 
   return (
     <>
-      <Layout>
+      <Layout noHeader={true}>
         <div>123</div>
       </Layout>
     </>

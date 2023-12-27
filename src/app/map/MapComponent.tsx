@@ -1,16 +1,20 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { TouristSpot } from '@/types/touristSpots';
-import CategoryResultList from '@/components/CategoryResultList';
+import React, { useEffect, useState } from "react";
+import { TouristSpot } from "@/types/touristSpots";
+import CategoryResultList from "@/components/CategoryResultList";
 
 interface MapComponentProps {
   spots: TouristSpot[];
-  markerImages: { permanent: string; festival: string; };
+  markerImages: { permanent: string; festival: string };
   onMapLoad?: (map: any, markers: any[]) => void;
 }
 
-const MapComponent = ({ spots, markerImages, onMapLoad }: MapComponentProps) => {
+const MapComponent = ({
+  spots,
+  markerImages,
+  onMapLoad,
+}: MapComponentProps) => {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -19,7 +23,7 @@ const MapComponent = ({ spots, markerImages, onMapLoad }: MapComponentProps) => 
 
   useEffect(() => {
     function initializeMap() {
-      const mapContainer = document.getElementById("jeju-map"); 
+      const mapContainer = document.getElementById("jeju-map");
       const mapOption = {
         center: new window.kakao.maps.LatLng(33.450701, 126.570667),
         level: 8,
@@ -28,16 +32,22 @@ const MapComponent = ({ spots, markerImages, onMapLoad }: MapComponentProps) => 
       const newMap = new window.kakao.maps.Map(mapContainer, mapOption);
       setMap(newMap);
 
-      const newMarkers = spots.map(spot => {
+      const newMarkers = spots.map((spot) => {
         const imageSize = new window.kakao.maps.Size(24, 35);
-        const imageSrc = spot.category === 'permanent' ? markerImages.permanent : markerImages.festival;
-        const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+        const imageSrc =
+          spot.category === "permanent"
+            ? markerImages.permanent
+            : markerImages.festival;
+        const markerImage = new window.kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize
+        );
 
         const marker = new window.kakao.maps.Marker({
           map: newMap,
           position: new window.kakao.maps.LatLng(spot.lat, spot.lng),
           title: spot.name,
-          image: markerImage
+          image: markerImage,
         });
 
         return marker;
@@ -51,7 +61,7 @@ const MapComponent = ({ spots, markerImages, onMapLoad }: MapComponentProps) => 
     }
 
     if (!window.kakao || !window.kakao.maps) {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = "/maps-api";
 
       document.head.appendChild(script);
@@ -64,9 +74,8 @@ const MapComponent = ({ spots, markerImages, onMapLoad }: MapComponentProps) => 
     }
   }, [spots, markerImages, onMapLoad]);
 
-  return 
-  <div id="jeju-map" className="w-full h-[calc(100%-3.75rem)]">
-  </div>  
+  return;
+  <div id="jeju-map" className="w-full h-[calc(100%-3.75rem)]"></div>;
 };
 
 export default MapComponent;
