@@ -15,7 +15,7 @@ interface CategoryResultListProps {
   onHideList: () => void;
 }
 
-const CategoryResultList: React.FC<CategoryResultListProps> = ({ spots, map, isListVisible, onHideList }) => {
+function CategoryResultList({ spots, map, isListVisible, onHideList }: CategoryResultListProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [height, setHeight] = useState(100);
   const [fullHeight, setFullHeight] = useState(0);
@@ -56,7 +56,12 @@ const CategoryResultList: React.FC<CategoryResultListProps> = ({ spots, map, isL
       style={{ height: expandStyle.height }}
       className={`absolute bottom-0 z-50 p-4 bg-white shadow-lg overflow-y-auto w-[500px] rounded-t-2xl ${isListVisible ? '' : 'hidden'}`}
     >
-      <div className="w-1/6 h-2 bg-gray-300 rounded-lg cursor-pointer mx-auto mb-2" onClick={handleDrag}></div>
+    <div 
+      className="w-full cursor-pointer mx-auto mb-2" 
+      onClick={handleDrag}
+    >
+      <div className="w-1/6 h-2 bg-gray-300 rounded-lg mx-auto"></div>
+    </div>
       {spots.map(spot => (
         <div 
           key={spot.name} 
@@ -69,6 +74,6 @@ const CategoryResultList: React.FC<CategoryResultListProps> = ({ spots, map, isL
       ))}
     </animated.div>
   );
-};
+}
 
 export default CategoryResultList;
