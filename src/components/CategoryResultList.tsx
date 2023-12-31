@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSpring, animated, config } from 'react-spring';
 
 interface TouristSpot {
@@ -19,6 +19,7 @@ function CategoryResultList({ spots, map, isListVisible, onHideList }: CategoryR
   const [isExpanded, setIsExpanded] = useState(false);
   const [height, setHeight] = useState(100);
   const [fullHeight, setFullHeight] = useState(0);
+  const listRef = useRef(null); 
 
   useEffect(() => {
     setFullHeight(window.innerHeight);
@@ -32,27 +33,33 @@ function CategoryResultList({ spots, map, isListVisible, onHideList }: CategoryR
   const handleDrag = () => {
     if (height === 100) {
       setHeight(40 * (fullHeight / 100));
-      setIsExpanded(false);
-    } else if (height === 40 * (fullHeight / 100)) {
+    } else if (height === 40 * (fullHeight / 100) && !isExpanded) {
       setHeight(fullHeight);
       setIsExpanded(true);
-    } else if (height === fullHeight) {
+    } else {
       setHeight(100);
       setIsExpanded(false);
     }
   };
 
   const handleListElementClick = (lat: number, lng: number) => {
-    console.log(`Clicked spot with lat: ${lat}, lng: ${lng}`);
-    const moveLatLng = new window.kakao.maps.LatLng(lat, lng); 
-    map.setCenter(moveLatLng);
+    if (map) {
+      const moveLatLng = new window.kakao.maps.LatLng(lat, lng);
+      map.setCenter(moveLatLng);
+      map.setLevel(3); 
+    }
     
-    setHeight(100);
+    setHeight(100); // 회색바의 높이에 맞춰 변경
     setIsExpanded(false);
+
+    if (listRef.current) {
+      listRef.current.scrollTop = 0;
+    }
   };
 
   return (
     <animated.div
+      ref={listRef}
       style={{ height: expandStyle.height }}
       className={`absolute bottom-0 z-50 p-4 bg-white shadow-lg overflow-y-auto w-[500px] rounded-t-2xl ${isListVisible ? '' : 'hidden'}`}
     >
