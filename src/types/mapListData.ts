@@ -1,5 +1,5 @@
 export interface CardData {
-    id: string;
+    id: number;
     title: string;
     imageUrl: string;
     interactionCount: number;

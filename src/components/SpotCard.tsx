@@ -6,7 +6,7 @@ interface SpotCardProps {
 
 const SpotCard = ({ data }: SpotCardProps) => {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white h-48">
       <img className="w-full" src={data.imageUrl} alt={data.title} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{data.title}</div>
