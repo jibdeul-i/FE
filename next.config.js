@@ -3,6 +3,9 @@
 const API_KEY = process.env.API_KEY;
 
 const nextConfig = {
+  images: {
+    domains: ['blog.kakaocdn.net'],
+  },
   experimental: {
     appDir: true,
   },

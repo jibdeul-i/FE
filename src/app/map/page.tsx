@@ -111,7 +111,7 @@ export default function MapPage() {
           )}
         </div>
         {/* {selectedSpot && (
-          <div className="absolute bottom-0 left-0 m-4">
+          <div className="z-40 absolute left-4 bottom-20 m-4">
             <SpotCard data={selectedSpot} />
           </div>
         )} */}
