@@ -22,21 +22,21 @@ export const attractionsData: TouristAttraction[] = [
     name: "성안 올레",
     description: "성안 올레의 설명니니다",
     address: "성안 올레 주소",
-    images: "https://wimg.mk.co.kr/meet/neds/2021/11/image_readmed_2021_1053506_16362360634839724.jpg",
+    images: ["https://wimg.mk.co.kr/meet/neds/2021/11/image_readmed_2021_1053506_16362360634839724.jpg"],
   },
   {
     id: 2,
     name: "서귀포시 성산읍 일출로",
     description: "성안 올레의 설명니니다",
     address: "성안 올레 주소",
-    images: "https://wimg.mk.co.kr/meet/neds/2021/11/image_readmed_2021_1053506_16362360634839724.jpg",
+    images: ["https://wimg.mk.co.kr/meet/neds/2021/11/image_readmed_2021_1053506_16362360634839724.jpg"],
   },
   {
     id: 3,
     name: "공설시장",
     description: "성안 올레의 설명니니다",
     address: "성안 올레 주소",
-    images: "https://wimg.mk.co.kr/meet/neds/2021/11/image_readmed_2021_1053506_16362360634839724.jpg",
+    images: ["https://wimg.mk.co.kr/meet/neds/2021/11/image_readmed_2021_1053506_16362360634839724.jpg"],
   },
 
 ]
