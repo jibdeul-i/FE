@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { TouristSpot } from "@/types/touristSpots";
-import CategoryResultList from "@/components/CategoryResultList";
+import React, { useEffect, useState } from 'react';
+import { TouristSpot } from '@/types/touristSpots';
+import CategoryResultList from '@/components/CategoryResultList';
 
 interface MapComponentProps {
   spots: TouristSpot[];
@@ -10,11 +10,7 @@ interface MapComponentProps {
   onMapLoad?: (map: any, markers: any[]) => void;
 }
 
-const MapComponent = ({
-  spots,
-  markerImages,
-  onMapLoad,
-}: MapComponentProps) => {
+const MapComponent = ({ spots, markerImages, onMapLoad }: MapComponentProps) => {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -23,7 +19,7 @@ const MapComponent = ({
 
   useEffect(() => {
     function initializeMap() {
-      const mapContainer = document.getElementById("jeju-map");
+      const mapContainer = document.getElementById('jeju-map');
       const mapOption = {
         center: new window.kakao.maps.LatLng(33.450701, 126.570667),
         level: 8,
@@ -34,14 +30,8 @@ const MapComponent = ({
 
       const newMarkers = spots.map((spot) => {
         const imageSize = new window.kakao.maps.Size(24, 35);
-        const imageSrc =
-          spot.category === "permanent"
-            ? markerImages.permanent
-            : markerImages.festival;
-        const markerImage = new window.kakao.maps.MarkerImage(
-          imageSrc,
-          imageSize
-        );
+        const imageSrc = spot.category === 'permanent' ? markerImages.permanent : markerImages.festival;
+        const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
 
         const marker = new window.kakao.maps.Marker({
           map: newMap,
@@ -61,8 +51,8 @@ const MapComponent = ({
     }
 
     if (!window.kakao || !window.kakao.maps) {
-      const script = document.createElement("script");
-      script.src = "/maps-api";
+      const script = document.createElement('script');
+      script.src = '/maps-api';
 
       document.head.appendChild(script);
 
